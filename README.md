@@ -9,10 +9,10 @@
 **本站网址**
 
 ```
-https://hughxusu.gitee.io/ai_py_lesson
+https://hughxusu.github.io/lesson-server/
 ```
 
-**[仓库地址](https://gitee.com/hughxusu/ai_py_lesson)**
+**[仓库地址](https://github.com/hughxusu/lesson-server)**
 
 ## 课程目标
 
