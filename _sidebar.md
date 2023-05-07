@@ -37,8 +37,11 @@
   * 多任务编程
     * [多任务](thread/one)
     * [进程](thread/two)
+    * [线程](thread/three)
+  * 网络编程
+    * [网络传输](net/one)
 
-  
+
 * 附录
   * [运算符](others/oper)
   * [操作系统](others/linux)
