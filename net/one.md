@@ -72,3 +72,175 @@ IP 地址的作用是标识网络中唯一的一台设备的，也就是说通�
 TCP 的英文全拼(Transmission Control Protocol)简称传输控制协议，它是一种面向连接的、可靠的、基于字节流的传输层通信协议。
 
 <img src="https://assets.website-files.com/5ff66329429d880392f6cba2/627cb3d4fcfd563ee9f2d43d_How%20does%20TCP%20work.jpg" style="zoom:90%;" />
+
+TCP 通信步骤：
+
+1. 创建连接
+2. 传输数据
+3. 关闭连接
+
+**TCP 的特点** 
+
+1. 面向连接
+   - 通信双方必须先建立好连接才能进行数据的传输，数据传输完成后，双方必须断开此连接，以释放系统资源。
+2. 可靠传输
+   - TCP 采用发送应答机制
+   - 超时重传
+   - 错误校验
+   - 流量控制和阻塞管理
+
+TCP 是一个稳定、可靠的传输协议，常用于对数据进行准确无误的传输，比如: 文件下载，浏览器上网。
+
+## socket 的介绍
+
+socket (简称 套接字) 是进程之间通信一个工具，里面封装 TCP 服务协议。
+
+<img src="https://s1.ax1x.com/2023/05/08/p90npEF.png" style="zoom:80%;" />
+
+## TCP 网络应用程序开发
+
+### 开发流程
+
+TCP 网络应用程序开发分为：TCP 客户端程序开发和 TCP 服务端程序开发
+
+### 
+
+![](https://book.itheima.net/uploads/course/python/images/PythonSenior/2.3.2.2/clip_image001.jpg)
+
+**TCP 客户端程序开发流程**
+
+1. 创建客户端套接字对象
+2. 和服务端套接字建立连接
+3. 发送数据
+4. 接收数据
+5. 关闭客户端套接字
+
+**TCP 服务端程序开发流程**
+
+1. 创建服务端端套接字对象
+2. 绑定端口号
+3. 设置监听
+4. 等待接受客户端的连接请求
+5. 接收数据
+6. 发送数据
+7. 关闭套接字
+
+### TCP 客户端程序开发
+
+```python
+import socket
+
+
+if __name__ == '__main__':
+
+    # 1. 创建tcp客户端套接字
+    # AF_INET: ipv4地址类型
+    # SOCK_STREAM： tcp传输协议类型
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
+    # 2. 和服务端套接字建立连接
+    client.connect(("127.0.0.1", 9090))
+
+    # 3. 发送数据到服务端
+    send = "hello, socket"
+    row = send.encode("utf-8")
+    client.send(row)
+    
+    # 4. 接收服务端的数据
+    accept = client.recv(1024)
+    result = accept.decode("utf-8")
+    print("接收服务端的数据为:", result)
+    
+    # 5. 关闭套接字
+    client.close()
+```
+
+### TCP服务端程序开发
+
+```python
+import socket
+
+if __name__ == '__main__':
+    # 1. 创建tcp服务端套接字
+    # AF_INET: ipv4 , AF_INET6: ipv6
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True) # 设置端口号复用
+    
+    # 2. 绑定端口号
+    server.bind(("", 9090))
+    
+    # 3. 设置监听
+    server.listen(128)
+    
+    # 4. 等待接受客户端的连接请求
+    client, ip_port = server.accept()
+    print("客户端的ip和端口号为:", ip_port)
+    
+    # 5. 接收客户端的数据
+    accept = client.recv(1024)
+    result = accept.decode("utf-8")
+    print("接收客户端的数据为:", result)
+
+
+    # 6. 发送数据到客户端
+    send_content = "问题正在处理中..."
+    send_data = send_content.encode("utf-8")
+    client.send(send_data)
+    client.close()
+    
+    # 7. 关闭服务端套接字， 表示服务端以后不再等待接受客户端的连接请求
+    server.close()
+```
+
+### 多任务开发
+
+```python
+import socket
+import threading
+
+
+def serve_client(port, client):
+    print("客户端的ip和端口号为:", port)
+    while True:
+        accept = client.recv(1024)
+        if accept:
+            print("接收的数据长度是:", len(accept))
+            result = accept.decode("utf-8")
+            print("接收客户端的数据为:", result, port)
+
+            send_content = "问题正在处理中..."
+            send_data = send_content.encode("utf-8")
+            client.send(send_data)
+        else:
+            print("客户端下线了:", port)
+            break
+    client.close()
+
+
+if __name__ == '__main__':
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+
+    server.bind(("", 9090))
+    server.listen(128)
+
+    while True:
+        client, ip_port = server.accept()
+        sub_thread = threading.Thread(target=serve_client, args=(ip_port, client))
+        sub_thread.setDaemon(True)
+        sub_thread.start()
+```
+
+## socket 原理
+
+当创建一个TCP socket对象的时候会有一个发送缓冲区和一个接收缓冲区，这个发送和接收缓冲区指的就是内存中的一片空间。
+
+**发送数据**
+
+数据必须得通过网卡发送，应用程序是无法直接通过网卡发送数据的，它需要调用操作系统接口。应用程序把发送的数据先写入到发送缓冲区，再由操作系统控制网卡把发送缓冲区的数据发送给服务端网卡 。
+
+**接收数据**
+
+操作系统通过网卡接收数据，把接收的数据写入到接收缓冲区，应用程序再从接收缓存区获取客户端发送的数据。
+
+![](https://s1.ax1x.com/2023/05/08/p90QDFU.png)
