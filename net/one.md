@@ -66,3 +66,9 @@ IP 地址的作用是标识网络中唯一的一台设备的，也就是说通�
 
 * 如果应用程序没有设置端口号，操作系统会在动态端口号这个范围内随机生成一个给开发的应用程序使用。
 * 当运行一个程序默认会有一个端口号，当这个程序退出时，所占用的这个端口号就会被释放。
+
+## TCP 的介绍
+
+TCP 的英文全拼(Transmission Control Protocol)简称传输控制协议，它是一种面向连接的、可靠的、基于字节流的传输层通信协议。
+
+<img src="https://assets.website-files.com/5ff66329429d880392f6cba2/627cb3d4fcfd563ee9f2d43d_How%20does%20TCP%20work.jpg" style="zoom:90%;" />
