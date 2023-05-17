@@ -41,7 +41,9 @@
   * 网络编程
     * [网络传输](net/one)
     * [HTTP协议和静态Web服务器](net/two)
-    * [数据库](net/three)
+  * 数据库
+    * [数据库基础](sql/1-基础)
+    * [MySQL基础](sql/2-MySQL基础)
 
 
 * 附录
