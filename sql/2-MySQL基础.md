@@ -104,7 +104,7 @@ drop database ncut; # ncut 数据库名
 show create database ncut; # ncut 数据库名
 ```
 
-### 标操作
+### 表操作
 
 查看当前数据库中所有表
 
@@ -120,7 +120,7 @@ create table students(
   id int unsigned primary key auto_increment not null,
   name varchar(20) not null,
   age tinyint unsigned default 0,
-  height decimal(5, g2),
+  height decimal(5, 2),
   gender enum('男', '女')
 );
 ```
@@ -167,4 +167,57 @@ show create table students; # students 表名
 ```mysql
 drop table students; # students 表名
 ```
+
+### 数据操作
+
+添加数据
+
+```mysql
+#            表名             数据值
+insert into students values(0, '张三', default, default, '男');
+
+#            表名      列名               数据值
+insert into students(name, age) values('张三', 15);
+
+#            表名              多个数据
+insert into students values(0, '张三', 55, 1.75, '男'),(0, '李四', 58, 1.85, '男');
+
+#             表名     列名           多个数据
+insert into students(name, height) values('张三', 1.75),('李四', 1.6);
+```
+
+> [!warning]
+>
+> 主键列是自动增长。全列插入时需要占位，通常使用空值（0或者null或者default）
+
+修改数据
+
+```sql
+#       表名         列名   修改值                    数据条件
+update students set age = 18, gender = '女' where id = 1;
+```
+
+删除数据
+
+```mysql
+#             表名           数据条件 
+delete from students where id = 5;
+```
+
+查询数据
+
+```mysql
+select * from students; # students 表名 查询所有列
+#        列名          表名
+select id, name from students; # 查询指定列 
+```
+
+> [!warning]
+>
+> 数据删除通常使用逻辑删除
+>
+> ```mysql
+> alter table students add isdelete bit default 0;
+> update students set isdelete = 1 where id = 8;
+> ```
 
