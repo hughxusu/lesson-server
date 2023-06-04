@@ -50,6 +50,8 @@
     * [数据库设计](sql/5-范式)
     * [Python链接MySQL](sql/6-pymysql)
     * [高级](sql/7-高级)
+  * 正则表达式
+    * [正则表达式](regular/1-简介)
 
 
 * 附录
