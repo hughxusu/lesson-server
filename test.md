@@ -1,6 +1,6 @@
 # 期末考试
 
-所有考题写在一个文件内，提交文件命名要求：
+所有考题写在一个文件内，提交文件命名要求，发送到电子邮箱  [hughxusu@ncut.edu.cn](mailto:hughxusu@ncut.edu.cn)
 
 ```shell
 # 学号_姓名.py
