@@ -10,7 +10,6 @@
 * 使用开发环境完成教学网站中的案例。
 * 完成课程设计。
 * 课程中不需教材，参考网站 [菜鸟教程](https://www.runoob.com/) 本站中部分案例和图片也来自该网站。
-* [Python语言练习网站](https://pynative.com/python-exercises-with-solutions/)
 
 ## 学习过程
 

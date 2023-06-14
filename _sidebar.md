@@ -1,5 +1,6 @@
 
 
+* [期末考试](test)
 * 引言
   * [了解程序员的工作](intro/web)
   * [认识Python](intro/history)
@@ -60,4 +61,3 @@
 
 - **链接** 
 [<img src="https://static.runoob.com/images/favicon.ico" alt="Code" style="zoom: 60%;" />菜鸟教程](https://www.runoob.com/)
-[习题网站](https://pynative.com/python-exercises-with-solutions/)
