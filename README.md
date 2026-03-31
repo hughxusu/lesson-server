@@ -2,10 +2,6 @@
 
 **本站网址**
 
-**[代码仓库]()**
-
-[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)]()
-
 ## 课程目标
 
 ## 课程内容
