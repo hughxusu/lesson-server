@@ -2,7 +2,7 @@
 
 安装fast api
 
-`pip install --upgrade fastapi`
+`uv add fastapi uvicorn`
 
 安装uvicorn
 
