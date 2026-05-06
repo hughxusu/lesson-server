@@ -73,3 +73,17 @@ async def func_async():
   return {"time": f'{end-start:.2f}s'}
 ```
 
+安装数据库
+
+```shell
+# 安装orm
+uv add fastapi sqlmodel
+
+# 安装数据库管理
+uv add alembic
+
+# 初始化数据库管理工具
+alembic init -t async alembic # 异步
+alembic init alembic # 同步
+```
+
